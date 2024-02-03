@@ -7,3 +7,14 @@ stages:
     params:
     - make_dataset.seed
     - make_dataset.train_split
+  train_model:
+    cmd: python ./src/models/train_model.py ./data/processed/train.csv ./models
+    deps:
+    - ./data/processed/train.csv
+    - ./src/models/train_model.py
+    params:
+    - train.estimators
+    - train.max_depth
+    - train.seed
+    outs:
+    - ./models/

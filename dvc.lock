@@ -15,3 +15,25 @@ stages:
       params.yaml:
         make_dataset.seed: 42
         make_dataset.train_split: 0.8
+  train_model:
+    cmd: python ./src/models/train_model.py ./data/processed/train.csv ./models
+    deps:
+    - path: ./data/processed/train.csv
+      hash: md5
+      md5: 45a357eb9404a6b91c2840d00c672959
+      size: 120882564
+    - path: ./src/models/train_model.py
+      hash: md5
+      md5: cc0566fec90a205f96f46c341db7548a
+      size: 1109
+    params:
+      params.yaml:
+        train.estimators: 8
+        train.max_depth: 6
+        train.seed: 10
+    outs:
+    - path: ./models/
+      hash: md5
+      md5: b2660292c9f7e10e7e4446c1ce229504.dir
+      size: 44249
+      nfiles: 1

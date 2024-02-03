@@ -6,7 +6,7 @@ import pathlib
 import joblib
 
 def save_model(model,path):
-    joblib.dump(model,path)
+    joblib.dump(model,path+'/model.joblib')
 
 def train_model(X,y,estimators,max_depth,seed):
     model=RandomForestClassifier(n_estimators=estimators,max_depth=max_depth,random_state=seed)
@@ -27,7 +27,11 @@ def main():
     model=train_model(X,y,params['estimators'],params['max_depth'],params['seed'])
     input_2=sys.argv[2]
     model_path=home_dir.as_posix()+input_2
+    pathlib.Path(model_path).mkdir(parents=True,exist_ok=True)
     save_model(model,model_path)
+
+if __name__=="__main__":
+    main()
 
 
     
