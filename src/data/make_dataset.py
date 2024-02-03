@@ -1,30 +1,32 @@
-# -*- coding: utf-8 -*-
-import click
-import logging
-from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
+from sklearn.model_selection import train_test_split
+import pathlib
+import pandas as pd 
+import yaml
 
+def load_data(file_path):
+    return pd.read_csv(file_path)
 
-@click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-@click.argument('output_filepath', type=click.Path())
-def main(input_filepath, output_filepath):
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
-    """
-    logger = logging.getLogger(__name__)
-    logger.info('making final data set from raw data')
+def split_data(data,split,seed):
+    train_data,test_data=train_test_split(data,train_size=split,random_state=seed)
+    return train_data,test_data
 
+def save_data(data,loc):
+    data.to_csv(loc,index=False)
 
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
-
-    # not used in this stub but often useful for finding various files
-    project_dir = Path(__file__).resolve().parents[2]
-
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
-    load_dotenv(find_dotenv())
-
+def main():
+    curr_dir=pathlib.Path(__file__)
+    home_dir=curr_dir.parent.parent.parent
+    params_file_path=home_dir.as_posix()+"/params.yaml"
+    params=yaml.safe_load(open(params_file_path))['make_dataset']
+    data_path=home_dir.as_posix()+"/data/raw/creditcard.csv"
+    output_path=home_dir.as_posix()+"/data/processed"
+    data=load_data(data_path)
+    train,test=split_data(data,params['train_split'],params['seed'])
+    for _ in ['train','test']:
+        save_data(data=_ ,loc=(output_path+"/"+_+".csv"))
+if __name__=="__main__":
     main()
+
+
+
+
