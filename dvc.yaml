@@ -1,0 +1,9 @@
+stages:
+  make_dataset:
+    cmd: python ./src/data/make_dataset.py
+    deps:
+    - ./data/raw/creditcard.csv
+    - ./src/data/make_dataset.py
+    params:
+    - make_dataset.seed
+    - make_dataset.train_split

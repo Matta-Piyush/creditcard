@@ -22,11 +22,10 @@ def main():
     output_path=home_dir.as_posix()+"/data/processed"
     data=load_data(data_path)
     train,test=split_data(data,params['train_split'],params['seed'])
-    for _ in ['train','test']:
-        save_data(data=_ ,loc=(output_path+"/"+_+".csv"))
+    save_data(train,output_path+'/train.csv')
+    save_data(test,output_path+'/test.csv')
+
+
 if __name__=="__main__":
     main()
-
-
-
 
