@@ -18,3 +18,10 @@ stages:
     - train.seed
     outs:
     - ./models/
+  visualize:
+    cmd: python ./src/visualization/visualize.py ./models/model.joblib ./data/processed
+    deps:
+    - ./models/model.joblib
+    - ./src/visualization/visualize.py
+    outs:
+    - ./dvclive/
