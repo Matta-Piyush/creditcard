@@ -22,7 +22,7 @@ jobs:
 
   build-and-push-ecr-image:
     name: Continuous Delivery
-    needs: Continuous Integration
+    needs: integration
     runs-on: ubuntu-latest
 
     steps:
