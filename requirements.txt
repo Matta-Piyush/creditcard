@@ -1,10 +1,4 @@
-# local package
--e .
-
-# external requirements
-scikit-learn
 fastapi
-uvicorn
 joblib
-pandas
-numpy
+uvicorn
+scikit-learn
