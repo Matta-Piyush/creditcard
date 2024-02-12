@@ -50,7 +50,7 @@ jobs:
         id: build-image 
         env:
           ecr_registry: ${{steps.login-ecr.outputs.registry}}
-          ecr_repostiory: ${{secrets.ECR_REPO_NAME}}
+          ecr_repository: ${{secrets.ECR_REPO_NAME}}
           image_tag: latest 
         
         run: |
