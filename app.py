@@ -78,7 +78,7 @@ def main(input_data : PredictionInput):
                 input_data.Amount
                 ]
     prediction=model.predict([features])[0].item()
-    return {'Preditction ':prediction}
+    return {'Prediction ':prediction}
 
 if __name__=="__main__":
     uvicorn.run(app,host="0.0.0.0",port=8080)
