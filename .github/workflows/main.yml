@@ -58,7 +58,7 @@ jobs:
           docker push $ecr-registry/$ecr-repository:$image-tag
           echo "::set-output name=image::$ecr-registry/$ecr-repository:$image-tag"
 
-  Continuous Deployment:
+  Continuous-Deployment:
     name: continuous-deployment
     needs: build-and-push-ecr-image
     runs-on: self-hosted
