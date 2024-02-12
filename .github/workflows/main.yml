@@ -49,14 +49,14 @@ jobs:
       - name: Build,tag, and push image to Amazon ECR
         id: build-image 
         env:
-          ecr-registry: ${{steps.login-ecr.outputs.registry}}
-          ecr-repostiory: ${{secrets.ECR_REPO_NAME}}
-          image-tag: latest 
+          ecr_registry: ${{steps.login-ecr.outputs.registry}}
+          ecr_repostiory: ${{secrets.ECR_REPO_NAME}}
+          image_tag: latest 
         
         run: |
-          docker build -t $ecr-registry/$ecr-repository:$image-tag .
-          docker push $ecr-registry/$ecr-repository:$image-tag
-          echo "::set-output name=image::$ecr-registry/$ecr-repository:$image-tag"
+          docker build -t $ecr_registry/$ecr_repository:$image_tag .
+          docker push $ecr_registry/$ecr_repository:$image_tag
+          echo "::set-output name=image::$ecr_registry/$ecr_repository:$image_tag"
 
   Continuous-Deployment:
     name: continuous-deployment
@@ -72,7 +72,7 @@ jobs:
 
       - name: Login to Amazon ECR 
         id: login-ecr
-        uses: aws-actions/amazon-login-ecr@v1
+        uses: aws-actions/amazon-ecr-login@v1
       
       - name: Pull latest images 
         run: |
