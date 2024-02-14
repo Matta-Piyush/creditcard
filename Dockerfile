@@ -3,5 +3,5 @@ WORKDIR /app
 COPY app.py /app/app.py
 COPY model/model.joblib /app/models/model.joblib
 COPY requirements.txt /app/requirements.txt
-RUN pip intall -r requirements.txt
+RUN pip install -r requirements.txt
 CMD ["python","app.py"]
